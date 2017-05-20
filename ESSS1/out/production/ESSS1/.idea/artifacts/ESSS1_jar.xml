@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ESSS1:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ESSS1_jar</output-path>
+    <root id="archive" name="ESSS1.jar">
+      <element id="module-output" name="ESSS1" />
+    </root>
+  </artifact>
+</component>
