@@ -2,9 +2,11 @@ package ESSS3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main {
 
@@ -12,7 +14,7 @@ public class Main {
         ArrayList<String> lines = new ArrayList<String>();
         String line;
         Scanner file;
-
+        
         if (validations(args)) {
             String path = new File(args[0]).getAbsolutePath();
             //String path = Thread.currentThread().getContextClassLoader().getResource("resources/sample1.txt").getPath();
@@ -90,11 +92,50 @@ public class Main {
     }
 
     public static void generateFile(){
+        PrintWriter out;
+        StringBuilder sb;
+        Random Random = new Random();
+
         int minRows = 100;
         int minCols = 80;
+        char[][] data;
+        int rand;
+        int col;
+        int row;
 
-        for(int i=0; i<minRows; i++){
 
+        try{
+            out = new PrintWriter("sample.txt");
+
+            for(int log=1; log<100; log++) {
+                row = Random.nextInt(50);
+                col = Random.nextInt(50);
+                data = new char[minCols + col][minRows + row];
+
+                for (int i = 0; i < minCols + col; i++) {
+                    rand = Random.nextInt(minRows + row + 1);
+                    for (int j = 0; j < minRows + row; j++) {
+                        if (j == rand)
+                            data[i][j] = '*';
+                        else
+                            data[i][j] = '.';
+                    }
+                }
+
+                for (int j = 0; j < minRows + row; j++) {
+                    sb = new StringBuilder();
+                    for (int i = 0; i < minCols + col; i++) {
+                        sb.append(data[i][j]);
+                    }
+                    out.println(sb.toString());
+                }
+                out.println();
+            }
+
+            out.close ();
+        }
+        catch(FileNotFoundException e){
+            System.out.println("File not found exception");
         }
 
         System.out.println();
